@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="{% static '/assets/css/apple/app.min.css' %}" rel="stylesheet"/>
+    <link href="{% static '/assets/plugins/ionicons/css/ionicons.min.css' %}" rel="stylesheet"/>
+    <!-- ================== END BASE CSS STYLE ================== -->
+
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="{% static '/assets/plugins/jvectormap-next/jquery-jvectormap.css' %}" rel="stylesheet"/>
+    <link href="{% static '/assets/plugins/gritter/css/jquery.gritter.css' %}" rel="stylesheet"/>
+    <link href="{% static '/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css' %}" rel="stylesheet"/>
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
+    <link href="{% static '/assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}"
+          rel="stylesheet"/>
+
+    <link href="{% static '/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet"/>
+    <link href="{% static '/assets/plugins/select2/dist/css/select2.min.css' %}" rel="stylesheet"/>
+
+</head>
+<body>
+<div id="page-loader" class="fade show"><span class="spinner"></span></div>
+{% block base_content %}
+<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+    {% include 'refresher_course/includes/header.html' %}
+    {% include 'refresher_course/includes/sidebar.html' %}
+
+    {% block content %}
+
+    {% endblock content %}
+    <div id="show_res"></div>
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade" data-click="scroll-top"><i
+            class="fa fa-angle-up"></i></a>
+</div>
+{% endblock base_content %}
+
+<script src="{% static 'assets/js/app.min.js' %}"></script>
+<script src="{% static 'assets/js/theme/apple.min.js' %}"></script>
+
+<script src="{% static 'assets/plugins/gritter/js/jquery.gritter.js' %}"></script>
+<script src="{% static 'assets/plugins/flot/jquery.flot.js' %}"></script>
+<script src="{% static 'assets/plugins/flot/jquery.flot.time.js' %}"></script>
+<script src="{% static 'assets/plugins/flot/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'assets/plugins/flot/jquery.flot.pie.js' %}"></script>
+<script src="{% static 'assets/plugins/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'assets/plugins/jvectormap-next/jquery-jvectormap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js' %}"></script>
+{#<script src="{% static 'assets/js/demo/dashboard.js' %}"></script>#}
+
+
+<script src="{% static 'assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'assets/plugins/select2/dist/js/select2.min.js' %}"></script>
+
+<script src="{% static 'js/showModal.js' %}"></script>
+
+</body>
+</html>

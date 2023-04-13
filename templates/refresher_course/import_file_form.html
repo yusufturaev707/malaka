@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sertifikatlarni shakllantirish{% endblock title %}
+{% block content %}
+    <div id="content" class="content">
+        <!-- begin breadcrumb -->
+        <ol class="breadcrumb float-xl-right">
+            <li class="breadcrumb-item"><a href="javascript:;">Bosh sahifa</a></li>
+            <li class="breadcrumb-item"><a href="javascript:;">Sertifikatlarni shakllantirish</a></li>
+        </ol>
+        <!-- end breadcrumb -->
+        <!-- begin page-header -->
+        <h1 class="page-header">Sertifikatlarni shakllantirish</h1>
+        <div class="panel panel-inverse">
+            <!-- begin panel-heading -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    UZBMB
+                </h4>
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                       data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success"
+                       data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa    fa-times"></i></a>
+                </div>
+            </div>
+            <!-- end panel-heading -->
+            <div class="container-fluid" style="padding: 5%;">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3"></div>
+                    <div class="col-md-4 mb-3"><h4>OXIRGI SERTIFIKAT RAQAMI: {{ end_cer_num }}</h4></div>
+                    <div class="col-md-4 mb-3"></div>
+                </div>
+                <form class="needs-validation" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label><b>Kursni tanlang</b></label>
+                            {{ form.course }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label><b>Yilni tanlang</b></label>
+                            {{ form.year }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label><b>Sertificate turi</b></label>
+                            {{ form.certificate_turi }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label><b>Boshlanish kuni</b></label>
+                            {{ form.start_date }}
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label><b>Tugash kuni</b></label>
+                            <div class="input-group">
+                                {{ form.end_date }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label><b>Oy</b></label>
+                            {{ form.month }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label><b>Sertifikat boshlanish nomeri</b></label>
+                            <input type="number" class="form-control" id="id_begin_cer_nomer" name="begin_cer_nomer"
+                                   value="{{ end_cer_num }}" placeholder="Enter..">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label><b>Kursda o'qish tili</b></label>
+                            {{ form.nationality }}
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label><b>Faylni yuklang(.xls, .xlsx)</b></label>
+                            {{ form.file }}
+                        </div>
+                    </div>
+                    <button class="btn btn-success" type="submit"><b>Saqlash</b></button>
+                </form>
+
+            </div>
+            <!-- end panel -->
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne" style="background-color:#ffffff">
+                    <h5 class="mb-0">
+                        <button class="btn btn-outline-warning" type="button" data-toggle="collapse"
+                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            File yuklash uchun namuna
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <img src="{% static '/images/namuna.jpg' %}" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}ILMIY MARKAZ{% endblock title %}
+{% block content %}
+<div id="content" class="content">
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Bosh sahifa</a></li>
+    </ol>
+    <h1 class="page-header">Statistika</h1>
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="widget widget-stats bg-blue">
+                <div class="stats-icon"><i class="fa fa-certificate"></i></div>
+                <div class="stats-info">
+                    <h4>UMUMIY SERTIFIKATLAR</h4>
+                    <p>{{ all_certificates.count }}</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget widget-stats bg-green">
+                <div class="stats-icon"><i class="fa fa-certificate"></i></div>
+                <div class="stats-info">
+                    <h4>BERILGAN SERTIFIKATLAR</h4>
+                    <p>{{ get_certificates.count }}</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget widget-stats bg-orange">
+                <div class="stats-icon"><i class="fa fa-certificate"></i></div>
+                <div class="stats-info">
+                    <h4>BERILMAGAN SERTIFIKATLAR</h4>
+                    <p>{{ notget_certificates.count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget widget-stats bg-gray">
+                <div class="stats-icon"><i class="fa fa-clock"></i></div>
+                <div class="stats-info">
+                    <h4>O'TILGAN KURSLAR SONI</h4>
+                    <p>{{ courses}}</p>
+                </div>
+
+            </div>
+        </div>
+{#        <a href="{% url 'change_qrcode' %}" class="btn btn-lg btn-info">Generate</a>#}
+    </div>
+    <br>
+    <hr>
+    <h1 class="page-header">Har bir kursdagi jami qatnashganlar soni</h1>
+    <br>
+    <div class="row">
+        {% for name, user in kurslar %}
+        <div class="col-xl-6 col-md-6">
+            <div class="widget widget-stats bg-indigo">
+                <div class="stats-icon"><i class="fa fa-book"></i></div>
+                <div class="stats-info">
+                    <h4>{{ name }}</h4>
+                    <p>{{ user.count }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

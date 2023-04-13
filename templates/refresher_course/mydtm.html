@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}my.dtm{% endblock title %}
+{% block content %}
+    <div id="content" class="content">
+        <ol class="breadcrumb float-xl-right">
+            <li class="breadcrumb-item"><a href="javascript:;">Bosh sahifa</a></li>
+            <li class="breadcrumb-item"><a href="javascript:;">mydtm</a></li>
+        </ol>
+        <h1 class="page-header">Kurs uchun UZBMB.uz saytidan ro'yxatdan o'tganlar</h1>
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <h4 class="panel-title">Ilmiy Markaz</h4>
+            </div>
+            <div class="table-responsive" style="padding: 1%;">
+                <table class="table table-valign-middle table-panel mb-0">
+                    <thead>
+                    <tr>
+                        <th><strong>TR</strong></th>
+                        <th><strong>KURS_ID</strong></th>
+                        <th><strong>KURS NOMI</strong></th>
+                        <th><strong>KURS KUNI</strong></th>
+                        <th><strong>RO'YXATDAN O'TGANLAR</strong></th>
+                        <th><strong>TO'LOV QILGANLAR</strong></th>
+                    </tr>
+                    </thead>
+                    <tbody id="mydtm_table" style="font-size: 13px;">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setInterval(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'mydtm' %}",
+                    success: function (response) {
+                        $("#mydtm_table").empty();
+                        let tr = 0;
+                        for (let item of response.data) {
+                            tr++;
+                            let temp =
+                                "<tr>" +
+                                "<td>" + tr + "</td>" +
+                                "<td>" + item['service_id'] + "</td>" +
+                                `<td>` + item['course_name'] + "</td>" +
+                                "<td>" + item['test_day'] + "</td>" +
+                                `<td><label class="label label-warning">` + item['reg_count'] + "</label></td>" +
+                                `<td><label id="label_${item['service_id']}">` + item['pay_count'] + "</label></td>" +
+                                "</tr>";
+                            $("#mydtm_table").append(temp);
+                            if(item['pay_count'] > 0){
+                                $('#label_'+ item['service_id']).addClass("label label-success");
+                            } else {
+                                 $('#label_'+ item['service_id']).addClass("label label-danger");
+                            }
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
+            }, 10000);
+        });
+    </script>
+{% endblock %}

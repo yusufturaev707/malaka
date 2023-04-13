@@ -1,0 +1,23 @@
+<div class="modal fade" id="UserModal">
+    <div class="modal-dialog">
+        <form method="post" enctype="multipart/form-data" action="{% url 'delete_certificate' certificate.pk %}">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sertifikatni o'chirish</h4>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ certificate.qr_code.url }}" alt="" width="60"> <b><i>{{ certificate.first_name }} {{ certificate.last_name }}</i></b><br><hr>
+                    <span style="font-size: small">Bu Sertifikatni o'chirishga ishonchingiz komilmi?</span>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-white" data-dismiss="modal">Yoq</a>
+                        <button type="submit" class="btn btn-primary">Ha</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

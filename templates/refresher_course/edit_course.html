@@ -1,0 +1,46 @@
+{% load static %}
+<div class="modal fade" id="UserModal">
+    <div class="modal-dialog">
+        <form method="post" enctype="multipart/form-data" action="{% url 'edit_course' course.id %}">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kursni o'zgartirish</h5>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                </div>
+                <div class="modal-body">
+
+                    <table id="data-table-default"
+                           class="table table-striped table-bordered table-td-valign-middle">
+                        <tbody>
+                        <tr>
+                            <th class="text-nowrap">Nomi</th>
+                            <td class="text-nowrap">{{ form.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">Descriptin</th>
+                            <td class="text-nowrap">{{ form.language }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">Dars davomiyligi</th>
+                            <td class="text-nowrap">{{ form.hour_course }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">Soat ko'rinishi</th>
+                            <td class="text-nowrap">{{ form.is_visible_hour }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">Status</th>
+                            <td class="text-nowrap">{{ form.status }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-white" data-dismiss="modal">Yopish</a>
+                    <button type="submit" class="btn btn-primary">Saqlash</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

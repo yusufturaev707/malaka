@@ -1,0 +1,112 @@
+{% load static %}
+<div>
+    {% if persons %}
+        {% for person in persons %}
+            <div style="position: relative;">
+                <img alt="" src="{% static 'images/certificate.jpg' %}" style="width: 100%;">
+                <div style="position: absolute; top: 4.3cm; left: 6cm; text-align: center;font-size: 19px;">
+                    <h1 style="text-align: center;">O‘zbekiston Respublikasi</h1>
+                </div>
+                <div style="position: absolute; top: 6.5cm; left: 7.8cm; text-align: center; font-size: 18px;">
+                    <h2 style="text-align: center;">Malaka oshirish haqida</h2>
+                </div>
+                <div style="position: absolute; top: 8cm; left: 8.5cm; text-align: center;">
+                    <h1 style="text-align: center;">SERTIFIKAT</h1>
+                </div>
+                <div style="position: absolute; top: 10cm; left: 9cm; text-align: center;">
+                    <h1 style="text-align: center;">MO {{ person.cer_nomer|stringformat:"05d" }}</h1>
+                </div>
+                <div style="position: absolute; top: 12cm; left:53%; transform: translateX(-50%); text-align: center;">
+                    <div style="text-align: center; font-size: 20px; font-weight: bolder; text-transform:uppercase">
+                        {{ person.first_name }} {{ person.last_name }}<br>{{ person.middle_name }}
+                    </div>
+                </div>
+
+                <div style="position: absolute;top: 13.6cm; left: 4.8cm;text-align: center;">
+                    <h3 style="text-align: center; line-height: 0.81cm;">
+                        {% if person.course.id != 2 %}
+                            {{ person.year }}-yil {{ person.start_date }}-{{ person.end_date }}-{{ person.month }}
+
+                           {{ person.course.language|safe }}
+                        {% endif %}
+                        <br>
+                        {% if person.course.id == 2 %}
+                            {{ person.year }}-yil {{ person.start_date }}-{{ person.end_date }}-{{ person.month }}
+                            kunlari<br>
+                            Davlat test markazi huzuridagi  Ilmiy-o‘quv amaliy<br> markazida
+                            jami 36 soatlik <br>
+                            Milliy sertifikat uchun test topshiriqlarini shakllantirish
+                            <br>kursi {% if person.nationality.key == 'uz' %}(o‘zbek tili va adabiyot fani)
+                        {% elif person.nationality.key == 'ru' %} (rus tili va adabiyot fani)
+                        {% elif person.nationality.key == 'qq' %} (qoraqalpoq tili va adabiyot fani){% endif %}
+                            bo‘yicha malakasini oshirdi.
+                        {% endif %}
+                        <br>
+{#                        {% if person.course.id == 3 %}#}
+{#                            {{ person.year }}-yil {{ person.start_date }}-{{ person.end_date }}-{{ person.month }}#}
+{#                            kunlari<br>#}
+{#                            Davlat test markazi huzuridagi  Ilmiy-o‘quv amaliy<br> markazida#}
+{#                            jami 48 soatlik <br>Chet tilini bilish darajasini baholash bo‘yicha test topshiriqlarini<br>#}
+{#                            shakllantirish kursida malakasini oshirdi.#}
+{#                        {% endif %}#}
+{#                        <br>#}
+{#                        {% if person.course.id == 4 %}#}
+{#                            {{ person.year }}-yil {{ person.start_date }}-{{ person.end_date }}-{{ person.month }}#}
+{#                            kunlari<br>#}
+{#                            Davlat test markazi huzuridagi  Ilmiy-o‘quv amaliy<br> markazida#}
+{#                            Chet tilini bilish darajasini aniqlashning <br>umumlashtirilgan ko‘p darajali (Multi-level)#}
+{#                            test sinoviga <br>tayyorlash kursida malakasini oshirdi.#}
+{#                        {% endif %}#}
+{#                        {% if person.course.id == 5 %}#}
+{#                            {{ person.year }}-yil {{ person.start_date }}-{{ person.end_date }}-{{ person.month }}#}
+{#                            kunlari<br>#}
+{#                            Davlat test markazi huzuridagi  Ilmiy-o‘quv amaliy<br> markazida jami 24 soatlik <br>#}
+{#                            Bilimni baholashda test topshiriqlarini shakllantirish amaliyoti  <br>bo‘yicha malakasini#}
+{#                            oshirdi.#}
+{#                        {% endif %}#}
+{#                        {% if person.course.id == 6 %}#}
+{#                            {{ person.year }}-yil {{ person.start_date }}-{{ person.end_date }}-{{ person.month }}#}
+{#                            {{ person.course.description|safe }}#}
+{#                        {% endif %}#}
+                    </h3>
+                </div>
+
+                <div style="position: absolute; top: 22cm; left: 6.5cm; text-align: center;">
+                    <h3 style="text-align: center;">
+                        Boshliq <span>__________________________</span> A.Baratov
+                    </h3>
+                </div>
+                <div style="position: absolute; top: 23.5cm; left: 6.5cm; text-align: center;">
+                    <div style="text-align: center;">
+                        Muhr o‘rni
+                    </div>
+                </div>
+                <p class="text"
+                   style="position: absolute; left: 8.4cm; top: 24.1cm; z-index: 2; font-family: Arial, sans-serif; font-style: italic;">{{ person.registered_day }}</p>
+                <p class="text"
+                   style="position: absolute; left: 15.2cm; top: 24.1cm; z-index: 2; font-family: Arial, sans-serif; font-style: italic;">{{ person.registered_number|stringformat:"02d" }}</p>
+                <div style="position: absolute; top: 24cm; left: 6.5cm; text-align: center;">
+                    <h3 style="text-align: center;">
+                        Sana <span>_______________<span></span></span> Qayd raqami <span>___________</span>
+                    </h3>
+                </div>
+                <div style="position: absolute; top: 25.5cm; right: 1.5cm; text-align: center;">
+                    <img src="{{ person.qr_code.url }}" alt="" width="110" height="110">
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1>None</h1>
+    {% endif %}
+
+</div>
+
+<script type="text/javascript">
+    window.print();
+    document.addEventListener('keydown', function (event) {
+        const key = event.key;
+        if (key === "Escape") {
+            window.close();
+        }
+    });
+</script>

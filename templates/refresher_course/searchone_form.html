@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sertifikatni izlash{% endblock title %}
+{% block content %}
+    <div id="content" class="content">
+
+        <ol class="breadcrumb float-xl-right">
+            <li class="breadcrumb-item"><a href="javascript:;">Bosh sahifa</a></li>
+            <li class="breadcrumb-item"><a href="javascript:;">Sertifikatni izlash</a></li>
+        </ol>
+
+        <!-- begin page-header -->
+        <h1 class="page-header">Sertifikatni izlash</h1>
+        <div class="panel panel-inverse">
+            <!-- begin panel-heading -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    UZBMB
+                </h4>
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                       data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success"
+                       data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"
+                       data-click="panel-remove"><i class="fa    fa-times"></i></a>
+                </div>
+            </div>
+            <!-- end panel-heading -->
+            <div class="container-fluid" style="padding: 5%;">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3"></div>
+                    <div class="col-md-4 mb-3"><h4>SERTIFIKARNI NOMERLARI ORQALI IZLASH</h4></div>
+                    <div class="col-md-4 mb-3"></div>
+                </div>
+                <div class="container">
+                    <form class="needs-validation" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label><b>YILNI KIRITING</b>
+                                    <input type="number" class="form-control" placeholder="Enter"
+                                           name="year" required>
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <label><b>NOMERLARNI KIRITING</b></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="example 101,102,103,..."
+                                       name="cer_numbers" required>
+                            </div>
+                        </div>
+                        <br>
+{#                        <br>#}
+{#                        <div class="form-row">#}
+{#                            <label><b>QAYD RAQAMLAR</b></label>#}
+{#                            <div class="input-group">#}
+{#                                <input type="text" class="form-control" placeholder="qayd raqamlar"#}
+{#                                       name="registered_numbers" required>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <br>#}
+                        <button type="submit" class="btn btn-info"><b>Searching</b></button>
+                    </form>
+                </div>
+            </div>
+            <!-- end panel -->
+        </div>
+
+        {% if persons %}
+            <div class="container-fluid" style="padding-top: 1%; background-color: #fff; border-radius: 5px;">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3"></div>
+                    <div class="col-md-4 mb-3">
+                        <center><h4>NATIJA</h4></center>
+                    </div>
+                    <div class="col-md-4 mb-3"></div>
+                </div>
+                <div class="container">
+                    <div class="table-responsive">
+
+                        <table class="table table-striped table-bordered table-td-valign-middle table-hover">
+                            <thead class="text-center">
+                            <tr>
+                                <th>Familiya</th>
+                                <th>Ism</th>
+                                <th>Sharf</th>
+                                <th>Kurs vaqti</th>
+                                <th>Sertifikat raqami</th>
+                                <th>Holat</th>
+                            </tr>
+                            </thead>
+                            <tbody class="text-center">
+                            {% for item in persons %}
+                                <tr>
+                                    <td>{{ item.first_name }}</td>
+                                    <td>{{ item.last_name }}</td>
+                                    <td>{{ item.middle_name }}</td>
+                                    <td>{{ item.start_date }}-{{ item.end_date }} {{ item.month }} {{ item.year }}-yil</td>
+                                    <td>{{ item.cer_nomer }}</td>
+                                    <td><span
+                                            class="badge {% if item.status %} badge-success {% else %} badge-danger {% endif %}"
+                                            style="font-size: 10px;">{{ item.status }}</span></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <a href="" class="btn btn-md btn-block btn-outline-success">Hammasini chop etish</a>
+                    <br>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="form-row">
+                <div class="col-md-4 mb-3"></div>
+                <div class="col-md-4 mb-3">
+{#                    <center><h4>Natija topilmadi.</h4></center>#}
+                </div>
+                <div class="col-md-4 mb-3"></div>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock content %}
